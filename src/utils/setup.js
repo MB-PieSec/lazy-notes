@@ -21,6 +21,10 @@ function isYtDlpInstalled() {
     return runCommand('yt-dlp --version');
 }
 
+function isDenoInstalled() {
+    return runCommand('deno --version');
+}
+
 function getPythonScriptsPath() {
     try {
         const result = execSync('python -c "import sysconfig; print(sysconfig.get_path(\'scripts\'))"', { encoding: 'utf-8' });
@@ -51,6 +55,21 @@ function installYtDlp() {
         }
         return true;
     } catch {
+        return false;
+    }
+}
+
+function installDeno() {
+    try {
+        console.log(chalk.yellow('Installing Deno...'));
+        // Run the official Deno installer for Windows
+        execSync('irm https://deno.land/install.ps1 | iex', { 
+            stdio: 'inherit', 
+            shell: 'powershell.exe' 
+        });
+        return true;
+    } catch (error) {
+        console.error('Deno installation failed:', error.message);
         return false;
     }
 }
@@ -103,5 +122,21 @@ export async function runSetup() {
         ytdlpSpinner.succeed('yt-dlp ready');
     }
 
-    console.log('');
+    // Check Deno
+    const denoSpinner = ora('Checking Deno...').start();
+    if (!isDenoInstalled()) {
+        denoSpinner.text = 'Installing Deno...';
+        if (installDeno()) {
+            denoSpinner.succeed('Deno installed successfully');
+            // Give user a note about restarting terminal
+            console.log(chalk.yellow('\n⚠️  Please restart your terminal for Deno to be recognized in PATH.'));
+        } else {
+            denoSpinner.fail('Failed to install Deno');
+            process.exit(1);
+        }
+    } else {
+        denoSpinner.succeed('Deno ready');
+    }
+
+    console.log(chalk.green('\n✅ All dependencies are ready!\n'));
 }
