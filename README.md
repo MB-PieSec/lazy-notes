@@ -1,4 +1,4 @@
-# 🎵 Lazy Notes
+# 📓 Lazy Notes
 
 ![Node.js](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
@@ -144,7 +144,7 @@ Made with ❤️ by [MB-PieSec](https://github.com/MB-PieSec)
 
 ---
 
-# 🎵 Lazy Notes — نسخه فارسی
+# 📓 Lazy Notes — نسخه فارسی
 
 یک ابزار CLI هوشمند که ترنسکریپت ویدیوهای یوتیوب رو دریافت می‌کنه و به صورت خودکار نوت و فلش‌کارت در فرمت Markdown تولید می‌کنه — تا بدون نوشتن دستی یاد بگیری.
 
